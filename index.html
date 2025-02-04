@@ -8,34 +8,24 @@
 </head>
 <body>
     <div class="game-container">
-        <h1>Gunting Batu Kertas</h1>
-        <div class="choices">
-            <button id="rock" class="choice">
-                <img src="batu.png" alt="Batu" width="100">
-                <p>Batu</p>
-            </button>
-            <button id="paper" class="choice">
-                <img src="kertas.png" alt="Kertas" width="100">
-                <p>Kertas</p>
-            </button>
-            <button id="scissors" class="choice">
-                <img src="gunting..png" alt="Gunting" width="100">
-                <p>Gunting</p>
-            </button>
-        </div>
-        <div class="computer-choice">
-            <h3>Pilihan Komputer:</h3>
-            <img id="computer-img" src="batu.png" alt="Pilihan Komputer" width="100">
-        </div>
-        <div class="result">
-            <p id="result-message">Pilih pilihan Anda</p>
-        </div>
-        <div class="game-info">
-            <p id="user-score">Skor Anda: 0</p>
-            <p id="computer-score">Skor Komputer: 0</p>
-        </div>
+        <h1>Game Batu Gunting Kertas</h1>
+    <div class="game-container">
+        <img src="batu.png" alt="Batu" onclick="playGame('batu')">
+        <img src="gunting.png" alt="Gunting" onclick="playGame('gunting')">
+        <img src="kertas.png" alt="Kertas" onclick="playGame('kertas')">
     </div>
 
+    <div class="result" id="result"></div>
+
+    <div id="playerChoiceContainer">
+        <h2>Pemain Memilih:</h2>
+        <img id="playerChoice" src="batu.png" alt="Pemain" class="loading">
+    </div>
+
+    <div id="computerChoiceContainer">
+        <h2>Komputer Memilih:</h2>
+        <img id="computerChoice" src="batu.png" alt="Komputer" class="loading">
+    </div>
     <script src="jawa.js"></script>
 </body>
 </html>

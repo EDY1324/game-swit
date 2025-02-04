@@ -1,72 +1,52 @@
-let userScore = 0;
-let computerScore = 0;
+function playGame(playerChoice) {
+    const choices = ['batu', 'gunting', 'kertas'];
+    const computerChoice = choices[Math.floor(Math.random() * 3)];
 
-const resultMessage = document.getElementById('result-message');
-const userScoreElement = document.getElementById('user-score');
-const computerScoreElement = document.getElementById('computer-score');
-const computerImg = document.getElementById('computer-img');
+    let playerIndex = 0;
+    const playerImage = document.getElementById('playerChoice');
+    const loadingPlayerImages = ['batu.png', 'gunting.png', 'kertas.png'];
 
-let computerChoice = 'rock'
-let interval;
-function getRandomChoice() {
-    const choices = ['rock', 'paper', 'scissors'];
-    const randomIndex = Math.floor(Math.random() * 3);
-    return choices[randomIndex];
-}
+    let computerIndex = 0;
+    const computerImage = document.getElementById('computerChoice');
+    const loadingComputerImages = ['batu.png', 'gunting.png', 'kertas.png'];
 
-function animateComputerChoice() {
-    let timeLeft = 20;
-    resultMessage.textContent = "Komputer sedang memilih...";
-    interval = setInterval(() => {
-        computerChoice = getRandomChoice();
-        computerImg.src = `${computerChoice}.png`;
-        timeLeft--;
+    const intervalPlayer = setInterval(() => {
+        playerImage.src = loadingPlayerImages[playerIndex];
+        playerIndex = (playerIndex + 1) % 3;
+    }, 150);
 
-        if (timeLeft === 0) {
-            clearInterval(interval);
-            resultMessage.textContent = "";
-            playRound();
-        }
+    const intervalComputer = setInterval(() => {
+        computerImage.src = loadingComputerImages[computerIndex];
+        computerIndex = (computerIndex + 1) % 3;
+    }, 150);
+
+    setTimeout(() => {
+        clearInterval(intervalPlayer);
+        clearInterval(intervalComputer);
+
+        playerImage.src = `${playerChoice}.png`;
+        computerImage.src = `${computerChoice}.png`;
+
+        const result = determineWinner(playerChoice, computerChoice);
+        document.getElementById('result').innerHTML = `
+            <p>Pemain memilih: <strong>${playerChoice}</strong></p>
+            <p>Komputer memilih: <strong>${computerChoice}</strong></p>
+            <p>Hasil: <strong>${result}</strong></p>
+        `;
     }, 1000);
 }
 
-function playRound(userChoice) {
-    if (userChoice === computerChoice) {
-        resultMessage.textContent = "Seri!";
-    } 
-    else if (
-        (userChoice === 'rock' && computerChoice === 'scissors') ||
-        (userChoice === 'paper' && computerChoice === 'rock') ||
-        (userChoice === 'scissors' && computerChoice === 'paper')
-    ) {
-        resultMessage.textContent = "Anda Menang!";
-        userScore++;
-    } 
-    else {
-        resultMessage.textContent = "Komputer Menang!";
+function determineWinner(player, computer) {
+    if (player === computer) {
+        return 'Seri';
     }
-
-    userScoreElement.textContent = `Skor Anda: ${userScore}`;
-    computerScoreElement.textContent = `Skor Komputer: ${computerScore}`;
+    if (
+        (player === 'batu' && computer === 'gunting') ||
+        (player === 'gunting' && computer === 'kertas') ||
+        (player === 'kertas' && computer === 'batu')
+    ) {
+        return 'Pemain Menang';
+    } else {
+        return 'Komputer Menang';
+    }
 }
-
-document.getElementById('rock').addEventListener('click', () => {
-    animateComputerChoice();
-    setTimeout(() => { 
-        playRound('rock');
-    }, 2000);
-});
-
-document.getElementById('paper').addEventListener('click', () => {
-    animateComputerChoice();
-    setTimeout(() => {
-        playRound('paper');
-    }, 2000);
-});
-
-document.getElementById('scissors').addEventListener('click', () => {
-    animateComputerChoice();
-    setTimeout(() => {
-        playRound('scissors');
-    }, 2000);
-});
