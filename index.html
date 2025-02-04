@@ -3,34 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Permainan Batu Gunting Kertas</title>
+    <title>Gunting Batu Kertas</title>
     <link rel="stylesheet" href="gaya.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Permainan Batu, Gunting, Kertas</h1>
-
-        <div class="mode-selection">
-            <button class="mode" id="pvp">Mode PvP</button>
-            <button class="mode" id="pvk">Mode PvK</button>
+        <h1>Gunting Batu Kertas</h1>
+        <div class="choices">
+            <button id="rock" class="choice">
+                <img src="batu.png" alt="Batu" width="100">
+                <p>Batu</p>
+            </button>
+            <button id="paper" class="choice">
+                <img src="kertas.png" alt="Kertas" width="100">
+                <p>Kertas</p>
+            </button>
+            <button id="scissors" class="choice">
+                <img src="gunting..png" alt="Gunting" width="100">
+                <p>Gunting</p>
+            </button>
         </div>
-
-        <div class="game-section" style="display: none;">
-            <div class="player-info">
-                <p id="turnInfo">Giliran Pemain 1</p>
-            </div>
-
-            <div class="choices">
-                <button class="choice" id="batu">Batu</button>
-                <button class="choice" id="gunting">Gunting</button>
-                <button class="choice" id="kertas">Kertas</button>
-            </div>
-
-            <div class="result">
-                <p id="player1Choice">Pilihan Pemain 1: -</p>
-                <p id="player2Choice">Pilihan Pemain 2: -</p>
-                <p id="resultMessage">Hasil: -</p>
-            </div>
+        <div class="computer-choice">
+            <h3>Pilihan Komputer:</h3>
+            <img id="computer-img" src="batu.png" alt="Pilihan Komputer" width="100">
+        </div>
+        <div class="result">
+            <p id="result-message">Pilih pilihan Anda</p>
+        </div>
+        <div class="game-info">
+            <p id="user-score">Skor Anda: 0</p>
+            <p id="computer-score">Skor Komputer: 0</p>
         </div>
     </div>
 
