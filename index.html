@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permainan Batu Gunting Kertas</title>
+    <link rel="stylesheet" href="gaya.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Permainan Batu, Gunting, Kertas</h1>
+
+        <div class="mode-selection">
+            <button class="mode" id="pvp">Mode PvP</button>
+            <button class="mode" id="pvk">Mode PvK</button>
+        </div>
+
+        <div class="game-section" style="display: none;">
+            <div class="player-info">
+                <p id="turnInfo">Giliran Pemain 1</p>
+            </div>
+
+            <div class="choices">
+                <button class="choice" id="batu">Batu</button>
+                <button class="choice" id="gunting">Gunting</button>
+                <button class="choice" id="kertas">Kertas</button>
+            </div>
+
+            <div class="result">
+                <p id="player1Choice">Pilihan Pemain 1: -</p>
+                <p id="player2Choice">Pilihan Pemain 2: -</p>
+                <p id="resultMessage">Hasil: -</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="jawa.js"></script>
+</body>
+</html>
