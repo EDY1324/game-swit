@@ -12,19 +12,20 @@ function getRandomChoice() {
     return choices[Math.floor(Math.random() * 3)];
 }
 
-function animateComputerChoice() {
+function animateComputerChoice(callback) {
     let timeLeft = 20;
     resultMessage.textContent = "Komputer sedang memilih...";
+    
     const interval = setInterval(() => {
         const tempChoice = getRandomChoice();
         computerImg.src = `${tempChoice}.png`;
         timeLeft--;
+    }, 100);
 
-        if (timeLeft === 0) {
-            clearInterval(interval);
-            resultMessage.textContent = "";
-        }
-    }, 1000);
+    setTimeout(() => {
+        clearInterval(interval);
+        callback();
+    }, 10000); 
 }
 
 function playRound(userChoice) {
@@ -52,13 +53,13 @@ function playRound(userChoice) {
 }
 
 document.getElementById('rock').addEventListener('click', () => {
-    playRound('rock');
+animateComputerChoice(() => playRound('rock'));
 });
 
 document.getElementById('paper').addEventListener('click', () => {
-    playRound('paper');
+    animateComputerChoice(() => playRound('paper'));
 });
 
 document.getElementById('scissors').addEventListener('click', () => {
-    playRound('scissors');
+    animateComputerChoice(() => playRound('scissors'));
 });
