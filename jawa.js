@@ -28,6 +28,7 @@ function animateComputerChoice() {
             playRound();
         }
     }, 1000);
+    console.log(computerChoice);
 }
 
 function playRound(userChoice) {
