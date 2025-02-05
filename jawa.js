@@ -5,46 +5,46 @@ const resultMessage = document.getElementById('result-message');
 const userScoreElement = document.getElementById('user-score');
 const computerScoreElement = document.getElementById('computer-score');
 const computerImg = document.getElementById('computer-img');
+const userImg = document.getElementById('user-img'); 
 
-let computerChoice = 'rock'
-let interval;
 function getRandomChoice() {
     const choices = ['rock', 'paper', 'scissors'];
-    const randomIndex = Math.floor(Math.random() * 3);
-    return choices[randomIndex];
+    return choices[Math.floor(Math.random() * 3)];
 }
 
 function animateComputerChoice() {
     let timeLeft = 20;
     resultMessage.textContent = "Komputer sedang memilih...";
-    interval = setInterval(() => {
-        computerChoice = getRandomChoice();
-        computerImg.src = `${computerChoice}.png`;
+    const interval = setInterval(() => {
+        const tempChoice = getRandomChoice();
+        computerImg.src = `${tempChoice}.png`;
         timeLeft--;
 
         if (timeLeft === 0) {
             clearInterval(interval);
             resultMessage.textContent = "";
-            playRound();
         }
     }, 1000);
-    console.log(computerChoice);
 }
 
 function playRound(userChoice) {
+    const computerChoice = getRandomChoice();
+    
+    userImg.src = `${userChoice}.png`;
+    computerImg.src = `${computerChoice}.png`;
+
     if (userChoice === computerChoice) {
         resultMessage.textContent = "Seri!";
-    } 
-    else if (
+    } else if (
         (userChoice === 'rock' && computerChoice === 'scissors') ||
         (userChoice === 'paper' && computerChoice === 'rock') ||
         (userChoice === 'scissors' && computerChoice === 'paper')
     ) {
         resultMessage.textContent = "Anda Menang!";
         userScore++;
-    } 
-    else {
+    } else {
         resultMessage.textContent = "Komputer Menang!";
+        computerScore++;
     }
 
     userScoreElement.textContent = `Skor Anda: ${userScore}`;
@@ -52,22 +52,13 @@ function playRound(userChoice) {
 }
 
 document.getElementById('rock').addEventListener('click', () => {
-    animateComputerChoice();
-    setTimeout(() => { 
-        playRound('rock');
-    }, 2000);
+    playRound('rock');
 });
 
 document.getElementById('paper').addEventListener('click', () => {
-    animateComputerChoice();
-    setTimeout(() => {
-        playRound('paper');
-    }, 2000);
+    playRound('paper');
 });
 
 document.getElementById('scissors').addEventListener('click', () => {
-    animateComputerChoice();
-    setTimeout(() => {
-        playRound('scissors');
-    }, 2000);
+    playRound('scissors');
 });
