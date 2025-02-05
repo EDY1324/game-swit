@@ -29,9 +29,9 @@ function animateComputerChoice(callback) {
 }
 
 function playRound(userChoice) {
-    const computerChoice = getRandomChoice();
-    
     userImg.src = `${userChoice}.png`;
+
+    const computerChoice = getRandomChoice();
     computerImg.src = `${computerChoice}.png`;
 
     if (userChoice === computerChoice) {
