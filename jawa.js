@@ -1,11 +1,13 @@
 let userScore = 0;
 let computerScore = 0;
+let gameHistory = [];
 
 const resultMessage = document.getElementById('result-message');
 const userScoreElement = document.getElementById('user-score');
 const computerScoreElement = document.getElementById('computer-score');
 const computerImg = document.getElementById('computer-img');
-const userImg = document.getElementById('user-img');  
+const userImg = document.getElementById('user-img');
+const historyElement = document.getElementById('history');
 
 let computerChoice = 'rock'; 
 let interval; 
@@ -40,7 +42,7 @@ function animateComputerChoice(userChoice) {
 
 function playRound(userChoice) {
     document.getElementById('user-choice').style.display = "block";
-    document.getElementById('user-choice').textContent = `Pilihan Anda: ${userChoice}`;
+    document.getElementById('user-choice').textContent = `Pilihan Kamu: ${userChoice}`;
     userImg.src = `${userChoice}.png`; 
 
     if (userChoice === computerChoice) {
@@ -51,7 +53,7 @@ function playRound(userChoice) {
         (userChoice === 'paper' && computerChoice === 'rock') ||
         (userChoice === 'scissors' && computerChoice === 'paper')
     ) {
-        resultMessage.textContent = "Anda Menang!";
+        resultMessage.textContent = "Kamu Menang!";
         userScore++; 
     } 
     else {
@@ -59,7 +61,10 @@ function playRound(userChoice) {
         computerScore++; 
     }
 
-    userScoreElement.textContent = `Skor Anda: ${userScore}`;
+    gameHistory.push(`Pemain memilih: ${userChoice}, Komputer memilih: ${computerChoice}. Hasil : ${resultMessage.textContent}`);
+    updateHistory();
+
+    userScoreElement.textContent = `Skor Kamu: ${userScore}`;
     computerScoreElement.textContent = `Skor Komputer: ${computerScore}`;
 
     document.getElementById('rock').disabled = false;
@@ -67,20 +72,29 @@ function playRound(userChoice) {
     document.getElementById('scissors').disabled = false;
 }
 
+function updateHistory() {
+    historyElement.innerHTML = "";
+    gameHistory.slice(-5).forEach((entry, index) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = entry;
+        historyElement.appendChild(listItem);
+    });
+}
+
 document.getElementById('rock').addEventListener('click', () => {
-    document.getElementById('user-choice').textContent = "Pilihan Anda: Batu";
+    document.getElementById('user-choice').textContent = "Pilihan Kamu: Batu";
     userImg.src = "rock.png";  
     animateComputerChoice('rock'); 
 });
 
 document.getElementById('paper').addEventListener('click', () => {
-    document.getElementById('user-choice').textContent = "Pilihan Anda: Kertas";
+    document.getElementById('user-choice').textContent = "Pilihan Kamu: Kertas";
     userImg.src = "paper.png";  
     animateComputerChoice('paper');  
 });
 
 document.getElementById('scissors').addEventListener('click', () => {
-    document.getElementById('user-choice').textContent = "Pilihan Anda: Gunting";
+    document.getElementById('user-choice').textContent = "Pilihan Kamu: Gunting";
     userImg.src = "scissors.png";  
     animateComputerChoice('scissors'); 
 });
