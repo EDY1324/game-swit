@@ -74,7 +74,7 @@ function playRound(userChoice) {
 
 function updateHistory() {
     historyElement.innerHTML = "";
-    gameHistory.slice(-5).forEach((entry, index) => {
+    gameHistory.slice(-5).forEach((entry) => {
         const listItem = document.createElement("li");
         listItem.textContent = entry;
         historyElement.appendChild(listItem);
